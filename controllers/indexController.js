@@ -2,25 +2,34 @@ const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 
 const getHomePage = asyncHandler(async (req, res) => {
-  res.render("index");
+  res.render("index", { user: Boolean(req.user) });
 });
 
 const getSignUpPage = asyncHandler(async (req, res) => {
-  res.render("signup");
+  res.render("signup", { user: Boolean(req.user) });
 });
 
 const getSignInPage = asyncHandler(async (req, res) => {
   const err_msg = req.session.messages || [];
   req.session.messages = [];
-  res.render("signin", {err_msg: err_msg});
+  res.render("signin", { user: Boolean(req.user), err_msg: err_msg });
 });
 
 const getDashboard = asyncHandler(async (req, res) => {
-  res.render("dashboard");
+  res.render("dashboard", {
+    username: req.user.username,
+    user: Boolean(req.user),
+  });
 });
 
 const signOut = asyncHandler(async (req, res) => {
   req.logOut(() => res.redirect("/sign_in"));
 });
 
-module.exports = { getHomePage, getSignUpPage, getSignInPage, getDashboard, signOut };
+module.exports = {
+  getHomePage,
+  getSignUpPage,
+  getSignInPage,
+  getDashboard,
+  signOut,
+};
