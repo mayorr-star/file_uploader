@@ -22,19 +22,22 @@
   </div>
   <ul class="nav_links">
     <li>
-        <a href="/">Home</a>
+      <a href="/">Home</a>
+    </li>
+    <% if (!user) { %>
+    <li>
+      <a href="/sign_in">Sign in</a>
     </li>
     <li>
-        <a href="/dashboard">Dashboard</a>
+      <a href="/sign_up">Sign up</a>
+    </li>
+    <% } else { %>
+    <li>
+      <a href="/dashboard">Dashboard</a>
     </li>
     <li>
-        <a href="/sign_in">Sign in</a>
+      <a href="/sign_out">Sign out</a>
     </li>
-    <li>
-        <a href="/sign_up">Sign up</a>
-    </li>
-    <li>
-        <a href="/sign_out">Sign out</a>
-    </li>
+    <% } %>
   </ul>
 </nav>
