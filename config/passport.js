@@ -4,9 +4,9 @@ const db = require('../db/queries');
 const { verifyPassword } = require("../utilis/password");
 
 passport.use(
-  new LocalStrategy((username, password, done) => {
+  new LocalStrategy( async(username, password, done) => {
     try {
-      const user = db.getUserByUsername(username);
+      const user = await db.getUserByUsername(username);
 
       if (!user)
         return done(null, false, {
