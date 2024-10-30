@@ -9,6 +9,10 @@ const getSignUpPage = asyncHandler(async (req, res) => {
   res.render("signup");
 });
 
+const getSignInPage= asyncHandler(async(req, res) => {
+  res.render('signin');
+})
 
 
-module.exports = { getHomePage, getSignUpPage };
+
+module.exports = { getHomePage, getSignUpPage, getSignInPage };
