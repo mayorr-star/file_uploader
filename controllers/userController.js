@@ -11,7 +11,7 @@ const validateNewUser = [
     .escape(),
   body("email")
     .isEmail()
-    .withMessage("Invalid email, please enteer a valid email address")
+    .withMessage("Invalid email, please enter a valid email address")
     .normalizeEmail(),
   body("password")
     .isLength({ min: 8, max: 50 })
@@ -44,7 +44,7 @@ const postUser = [
       });
     }
     const { username, email, password } = req.body;
-    const hashPassword = generatePassword(password);
+    const hashPassword = await generatePassword(password);
     await db.createUser(username, email, hashPassword);
     res.redirect("/sign_in");
   }),
