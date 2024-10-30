@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up | Files Bucket</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <header>
+        <h1>Sign up for free</h1>
+        <p>Or <a href="/sign_in">sign in to your existing account</a></p>
+    </header>
+    <main>
+        <div class="wrapper">
+            <%- include('partials/errors') %>
+            <form action="/user/sign_up" method="post">
+                <div class="input-control">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username">
+                </div>
+                <div class="input-control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email">
+                </div>
+                <div class="input-control">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                <div class="input-control">
+                    <label for="password_confirmation">Password confirmation</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation">
+                </div>
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>
