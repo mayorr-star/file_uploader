@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { PrismaClient } = require("@prisma/client");
+const { NotFoundError } = require("../error handling/errors/errors");
 
 const prisma = new PrismaClient();
 
@@ -9,6 +10,9 @@ const getUserByUsername = asyncHandler(async (username) => {
       username: username,
     },
   });
+  if (!user) {
+    throw new NotFoundError("Not found, cannot get user");
+  }
   return user;
 });
 
@@ -18,6 +22,9 @@ const getUserById = asyncHandler(async (userId) => {
       id: userId,
     },
   });
+  if (!user) {
+    throw new NotFoundError("Not found, user does not exist");
+  }
   return user;
 });
 
@@ -27,6 +34,9 @@ const getAllFolders = asyncHandler(async (userId) => {
     include: { files: true, subfolders: { include: { files: true } } },
     orderBy: { createdAt: "desc" },
   });
+  if (!folders) {
+    throw new NotFoundError("Not found, cannot get folders");
+  }
   return folders;
 });
 
@@ -35,6 +45,9 @@ const getRootFiles = asyncHandler(async () => {
     where: { folderId: undefined },
     orderBy: { uploadTime: "desc" },
   });
+  if (!rootFiles) {
+    throw new NotFoundError("Not found, cannot get files");
+  }
   return rootFiles;
 });
 
@@ -42,6 +55,9 @@ const getUniqueFile = asyncHandler(async (fileId, userId) => {
   const file = await prisma.file.findUnique({
     where: { userId: userId, id: fileId },
   });
+  if (!user) {
+    throw new NotFoundError("Not found, file does not exist");
+  }
   return file;
 });
 

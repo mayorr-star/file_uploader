@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
+const { NotFoundError } = require("../error handling/errors/errors");
 
 const renderUploadPage = asyncHandler(async (req, res) => {
   res.render("uploadfile", { user: Boolean(req.user) });
@@ -15,7 +16,8 @@ const postFile = asyncHandler(async (req, res) => {
 const getFile = asyncHandler(async (req, res) => {
   const fileId = req.params.fileId;
   const file = await db.getUniqueFile(fileId, req.user.id);
-  res.render("file", {user: Boolean(req.user), file: file });
+  if (!file) throw new NotFoundError("Not found, file does not exist");
+  res.render("file", { user: Boolean(req.user), file: file });
 });
 
 module.exports = { renderUploadPage, postFile, getFile };
