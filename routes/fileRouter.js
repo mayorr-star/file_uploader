@@ -7,6 +7,7 @@ const upload = multer({ storage: storage });
 const router = Router();
 
 router.get('/upload', fileController.renderUploadPage);
-router.post('/upload/new', upload.single('file'), fileController.postFile)
+router.post('/upload/new', upload.single('file'), fileController.postFile);
+router.get('/:fileId', fileController.getFile);
 
 module.exports = router;
