@@ -38,6 +38,13 @@ const getRootFiles = asyncHandler(async () => {
   return rootFiles;
 });
 
+const getUniqueFile = asyncHandler(async (fileId, userId) => {
+  const file = await prisma.file.findUnique({
+    where: { userId: userId, id: fileId },
+  });
+  return file;
+});
+
 const createUser = asyncHandler(async (username, email, password) => {
   await prisma.user.create({
     data: {
@@ -77,6 +84,7 @@ module.exports = {
   getUserById,
   getAllFolders,
   getRootFiles,
+  getUniqueFile,
   createUser,
   createFile,
   createFolder,
