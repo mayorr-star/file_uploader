@@ -5,6 +5,7 @@ const session = require('./config/session');
 const indexRouter = require('./routes/indexRouter');
 const userRouter = require('./routes/userRouter');
 const fileRouter = require('./routes/fileRouter');
+const folderRouter = require('./routes/folderRouter');
 
 require('dotenv').config();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 app.use('/file', fileRouter);
+app.use('/folder', folderRouter);
 app.use('/', indexRouter);
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`))
