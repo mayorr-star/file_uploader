@@ -16,9 +16,13 @@ const getSignInPage = asyncHandler(async (req, res) => {
 });
 
 const getDashboard = asyncHandler(async (req, res) => {
+  const folders = await db.getAllFolders(req.user.id);
+  const rootFiles = await db.getRootFiles();
   res.render("dashboard", {
     username: req.user.username,
     user: Boolean(req.user),
+    folders: folders,
+    rootFiles: rootFiles,
   });
 });
 
