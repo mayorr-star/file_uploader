@@ -3,7 +3,9 @@ const db = require("../db/queries");
 const { NotFoundError } = require("../error handling/errors/errors");
 
 const renderUploadPage = asyncHandler(async (req, res) => {
-  res.render("uploadfile", { user: Boolean(req.user) });
+  const folderId = req.params.folderId || null;
+  const url = folderId ? `/file/upload/${folderId}/new` : "/file/upload/new";
+  res.render("uploadfile", { user: Boolean(req.user), url: url });
 });
 
 const postFile = asyncHandler(async (req, res) => {
