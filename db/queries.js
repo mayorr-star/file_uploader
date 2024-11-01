@@ -33,7 +33,7 @@ const getAllFolders = asyncHandler(async (userId) => {
 
 const getRootFiles = asyncHandler(async () => {
   const rootFiles = await prisma.file.findMany({
-    where: { folderId: undefined },
+    where: { folderId: null },
     orderBy: { uploadTime: "desc" },
   });
   return rootFiles;
@@ -43,7 +43,6 @@ const getUniqueFile = asyncHandler(async (id) => {
   const file = await prisma.file.findUnique({
     where: { id: id },
   });
-  return file;
 });
 
 const getUniqueFolder = asyncHandler(async (id) => {
