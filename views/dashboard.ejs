@@ -30,7 +30,7 @@
             </svg>
         </button>
     </a>
-    <a href="folder/create/new">
+    <a href="folder/create">
         <button type="button">
               New folder
               <svg
@@ -57,15 +57,25 @@
             </div>
             <div class="grid_body">
               <% folders.forEach(folder => { %>
-                <a href="folder/:<%= folder.id %>">
-                    <div class="grid_body_name"><%= folder.name %></div>
-                    <div class="grid_body_size">---</div>
-                    <div class="grid_body_created"><%= folder.createdAt %></div>
-                  </tr>
-                </a>
+                <div class="folder">
+                  <a href="folder/<%= folder.id %>/open">
+                      <div class="grid_body_name"><%= folder.name %></div>
+                      <div class="grid_body_size">---</div>
+                      <div class="grid_body_created"><%= folder.createdAt %></div>
+                    </tr>
+                  </a>
+                  <div class="btns">
+                    <a href="/folder/<%= folder.id %>/update">
+                      <button type="button">Update</button>
+                    </a>'
+                    <form action="/folder/<%= folder.id %>/delete" method="post">
+                      <button type="submit">Delete</button>
+                    </form>
+                  </div>
+                </div>
                 <% }) %>
                 <% rootFiles.forEach(file => { %>
-                  <a href="file/<%= file.id %>">
+                  <a href="file/<%= file.id %>/open">
                     <div class="grid_body_name"><%= file.name %></div>
                     <div class="grid_body_size"><%= file.size %></div>
                     <div class="grid_body_created"><%= file.createdAt %></div>
