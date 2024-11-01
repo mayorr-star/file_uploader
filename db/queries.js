@@ -10,21 +10,15 @@ const getUserByUsername = asyncHandler(async (username) => {
       username: username,
     },
   });
-  if (!user) {
-    throw new NotFoundError("Not found, cannot get user");
-  }
   return user;
 });
 
-const getUserById = asyncHandler(async (userId) => {
+const getUserById = asyncHandler(async (id) => {
   const user = await prisma.user.findUnique({
     where: {
-      id: userId,
+      id: id,
     },
   });
-  if (!user) {
-    throw new NotFoundError("Not found, user does not exist");
-  }
   return user;
 });
 
@@ -34,9 +28,6 @@ const getAllFolders = asyncHandler(async (userId) => {
     include: { files: true, subfolders: { include: { files: true } } },
     orderBy: { createdAt: "desc" },
   });
-  if (!folders) {
-    throw new NotFoundError("Not found, cannot get folders");
-  }
   return folders;
 });
 
@@ -45,20 +36,24 @@ const getRootFiles = asyncHandler(async () => {
     where: { folderId: undefined },
     orderBy: { uploadTime: "desc" },
   });
-  if (!rootFiles) {
-    throw new NotFoundError("Not found, cannot get files");
-  }
   return rootFiles;
 });
 
-const getUniqueFile = asyncHandler(async (fileId, userId) => {
+const getUniqueFile = asyncHandler(async (id) => {
   const file = await prisma.file.findUnique({
-    where: { userId: userId, id: fileId },
+    where: { id: id },
   });
-  if (!user) {
-    throw new NotFoundError("Not found, file does not exist");
-  }
   return file;
+});
+
+const getUniqueFolder = asyncHandler(async (id) => {
+  const folder = await prisma.folder.findUnique({
+    where: {
+      id: id,
+    },
+    include: { files: true, subfolders: { include: { files: true } } },
+  });
+  return folder;
 });
 
 const createUser = asyncHandler(async (username, email, password) => {
@@ -95,13 +90,36 @@ const createFolder = asyncHandler(
     });
   }
 );
+
+const updateFolder = asyncHandler(async (id, newName) => {
+  await prisma.folder.update({
+    where: {
+      id: id
+    },
+    data: {
+      name: newName
+    }
+  })
+});
+
+const deleteFolder = asyncHandler(async(id) => {
+  await prisma.folder.delete({
+    where: {
+      id: id
+    }
+  })
+})
+
 module.exports = {
   getUserByUsername,
   getUserById,
   getAllFolders,
   getRootFiles,
   getUniqueFile,
+  getUniqueFolder,
   createUser,
   createFile,
   createFolder,
+  updateFolder,
+  deleteFolder
 };
