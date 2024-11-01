@@ -17,11 +17,10 @@ const getFolderContent = asyncHandler(async (req, res) => {
   const { folderId } = req.params;
   const folder = await db.getUniqueFolder(folderId);
   if (!folder) throw new NotFoundError('Not found, Folder does nt exist')
-  const folderName = folder.name;
   const files = folder.files;
   res.render("folderContent", {
     user: Boolean(req.user),
-    folderName: folderName,
+    folder: folder,
     files: files,
   });
 });
