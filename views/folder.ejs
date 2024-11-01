@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Folder | Files Bucket</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <header>
+        <h1>Add New Folder</h1>
+    </header>
+    <main>
+        <div class="white-bg">
+            <form action="/folder/create/new" method="post">
+                <div class="input-control">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+                </div>
+                    <button type="submit">Create</button>
+            </form>
+        </div>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>

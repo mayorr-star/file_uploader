@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update <%= folder.name %> | Files Bucket</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <main>
+        <div class="white_bg">
+            <div class="form">
+                <header>
+                    <h3>Update Folder</h3>
+                </header>
+                <%- include('partials/errors') %>
+                <form action="/folder/<%= folder.id %>/update" method="post">
+                    <div class="input-control">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="name" value="<%= folder.name %>" required>
+                    </div>
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>

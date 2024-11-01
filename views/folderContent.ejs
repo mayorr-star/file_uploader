@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= folderName %> | Files Bucket</title>
+  </head>
+  <body>
+    <%- include('partials/nav') %> 
+    <% if (files.length === 0) { %>
+        <div>
+          <p>Folder is empty</p>
+        </div>
+    <% } else { %>
+        <a href="file/<%= file.id %>">
+          <div class="grid_body_name"><%= file.name %></div>
+          <div class="grid_body_size"><%= file.size %></div>
+          <div class="grid_body_created"><%= file.createdAt %></div>
+        </a>
+    <% } %>
+    <%- include('partials/footer') %>
+  </body>
+</html>
