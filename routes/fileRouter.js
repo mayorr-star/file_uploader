@@ -8,6 +8,6 @@ const router = Router();
 
 router.get('/upload', fileController.renderUploadPage);
 router.post('/upload/new', upload.single('file'), fileController.postFile);
-router.get('/:fileId', fileController.getFile);
+router.get('/:fileId/open', fileController.getFile);
 
 module.exports = router;
