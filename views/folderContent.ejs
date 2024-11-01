@@ -3,21 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= folderName %> | Files Bucket</title>
+    <title><%= folder.name %> | Files Bucket</title>
   </head>
   <body>
     <%- include('partials/nav') %> 
-    <% if (files.length === 0) { %>
-        <div>
-          <p>Folder is empty</p>
-        </div>
-    <% } else { %>
-        <a href="file/<%= file.id %>">
-          <div class="grid_body_name"><%= file.name %></div>
-          <div class="grid_body_size"><%= file.size %></div>
-          <div class="grid_body_created"><%= file.createdAt %></div>
-        </a>
-    <% } %>
+    <main>
+      <div>
+        <a href="/file/upload/<%= folder.id%>">
+          <button type="button">
+            Upload file
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            >
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15.01l1.41 1.41L11 14.84V19h2v-4.16l1.59 1.59L16 15.01 12.01 11z"
+            />
+          </svg>
+      </button>
+  </a>
+      </div>
+      <% if (files.length === 0) { %>
+          <div>
+            <p>Folder is empty</p>
+          </div>
+      <% } else { %>
+        <% files.forEach(file => { %>
+          <a href="file/<%= file.id %>">
+            <div class="grid_body_name"><%= file.name %></div>
+            <div class="grid_body_size"><%= file.size %></div>
+            <div class="grid_body_created"><%= file.createdAt %></div>
+          </a>
+        <% }) %>
+      <% } %>
+    </main>
     <%- include('partials/footer') %>
   </body>
 </html>
