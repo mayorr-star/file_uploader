@@ -17,7 +17,7 @@ const postFile = asyncHandler(async (req, res) => {
 
 const getFile = asyncHandler(async (req, res) => {
   const fileId = req.params.fileId;
-  const file = await db.getUniqueFile(fileId, req.user.id);
+  const file = await db.getUniqueFile(fileId);
   if (!file) throw new NotFoundError("Not found, file does not exist");
   res.render("file", { user: Boolean(req.user), file: file });
 });
