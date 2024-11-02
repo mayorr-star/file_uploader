@@ -14,7 +14,7 @@
     <main>
       <section class="section_btns">
         <div class="btns">
-          <a href="file/upload">
+          <a href="/file/upload">
             <button type="button">
               Upload file
               <svg
@@ -30,7 +30,7 @@
             </svg>
         </button>
     </a>
-    <a href="folder/create">
+    <a href="/folder/create">
         <button type="button">
               New folder
               <svg
@@ -58,7 +58,7 @@
             <div class="grid_body">
               <% folders.forEach(folder => { %>
                 <div class="folder">
-                  <a href="folder/<%= folder.id %>/open">
+                  <a href="/folder/<%= folder.id %>/open">
                       <div class="grid_body_name"><%= folder.name %></div>
                       <div class="grid_body_size">---</div>
                       <div class="grid_body_created"><%= folder.createdAt %></div>
@@ -75,7 +75,7 @@
                 </div>
                 <% }) %>
                 <% rootFiles.forEach(file => { %>
-                  <a href="file/<%= file.id %>/open">
+                  <a href="/file/<%= file.id %>/open">
                     <div class="grid_body_name"><%= file.name %></div>
                     <div class="grid_body_size"><%= file.size %></div>
                     <div class="grid_body_created"><%= file.uploadTime %></div>
