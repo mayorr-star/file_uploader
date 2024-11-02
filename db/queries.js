@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const { PrismaClient } = require("@prisma/client");
-const { NotFoundError } = require("../error handling/errors/errors");
 
 const prisma = new PrismaClient();
 
@@ -22,10 +21,9 @@ const getUserById = asyncHandler(async (id) => {
   return user;
 });
 
-const getAllFolders = asyncHandler(async (userId) => {
+const getRootFolders = asyncHandler(async (userId) => {
   const folders = await prisma.folder.findMany({
-    where: { userId: userId },
-    include: { files: true, subfolders: { include: { files: true } } },
+    where: { userId: userId, parentId: null },
     orderBy: { createdAt: "desc" },
   });
   return folders;
@@ -43,6 +41,7 @@ const getUniqueFile = asyncHandler(async (id) => {
   const file = await prisma.file.findUnique({
     where: { id: id },
   });
+  return file
 });
 
 const getUniqueFolder = asyncHandler(async (id) => {
@@ -93,26 +92,32 @@ const createFolder = asyncHandler(
 const updateFolder = asyncHandler(async (id, newName) => {
   await prisma.folder.update({
     where: {
-      id: id
+      id: id,
     },
     data: {
-      name: newName
-    }
-  })
+      name: newName,
+    },
+  });
 });
 
-const deleteFolder = asyncHandler(async(id) => {
+const deleteFiles = asyncHandler(async (folderId) => {
+  await prisma.file.deleteMany({
+    where: { folderId: folderId },
+  });
+});
+
+const deleteFolder = asyncHandler(async (id) => {
   await prisma.folder.delete({
     where: {
-      id: id
-    }
-  })
-})
+      id: id,
+    },
+  });
+});
 
 module.exports = {
   getUserByUsername,
   getUserById,
-  getAllFolders,
+  getRootFolders,
   getRootFiles,
   getUniqueFile,
   getUniqueFolder,
@@ -120,5 +125,6 @@ module.exports = {
   createFile,
   createFolder,
   updateFolder,
-  deleteFolder
+  deleteFolder,
+  deleteFiles
 };

@@ -17,7 +17,7 @@ const getSignInPage = asyncHandler(async (req, res) => {
 });
 
 const getDashboard = asyncHandler(async (req, res) => {
-  const folders = await db.getAllFolders(req.user.id);
+  const folders = await db.getRootFolders(req.user.id);
   const rootFiles = await db.getRootFiles();
   if (!folders) {
     throw new NotFoundError('Not found, cannot get folders');
