@@ -4,24 +4,29 @@ const db = require("../db/queries");
 const { NotFoundError } = require("../error handling/errors/errors");
 
 const renderFolderForm = asyncHandler(async (req, res) => {
-  res.render("folder", { user: Boolean(req.user) });
+  const parentId = req.params.parentId || null;
+  const url = parentId ? `/folder/create/${parentId}/new` : "/folder/create/new";
+  res.render("folder", { user: Boolean(req.user), url: url });
 });
 
 const postFolder = asyncHandler(async (req, res) => {
   const folderName = req.body.name || "New folder";
-  await db.createFolder(folderName, req.user.id);
+  const {parentId} = req.params;
+  await db.createFolder(folderName, req.user.id, parentId);
   res.redirect("/dashboard");
 });
 
 const getFolderContent = asyncHandler(async (req, res) => {
   const { folderId } = req.params;
   const folder = await db.getUniqueFolder(folderId);
-  if (!folder) throw new NotFoundError('Not found, Folder does nt exist')
+  if (!folder) throw new NotFoundError("Not found, Folder does nt exist");
+  const subfolders = folder.subfolders;
   const files = folder.files;
   res.render("folderContent", {
     user: Boolean(req.user),
     folder: folder,
     files: files,
+    subfolders: subfolders
   });
 });
 
@@ -33,16 +38,16 @@ const renderUpdateForm = asyncHandler(async (req, res) => {
 
 const updateFolder = asyncHandler(async (req, res) => {
   const { name } = req.body;
-  const {folderId} = req.params;
+  const { folderId } = req.params;
   await db.updateFolder(folderId, name);
-   res.redirect('/dashboard')
+  res.redirect("/dashboard");
 });
 
 const deleteFolder = asyncHandler(async (req, res) => {
-  const { name } = req.body;
-  const {folderId} = req.params;
-  await db.deleteFolder(folderId, name);
-   res.redirect('/dashboard')
+  const { folderId } = req.params;
+  await db.deleteFiles(folderId);
+  await db.deleteFolder(folderId);
+  res.redirect("/dashboard");
 });
 
 module.exports = {
@@ -51,5 +56,5 @@ module.exports = {
   postFolder,
   updateFolder,
   getFolderContent,
-  deleteFolder
+  deleteFolder,
 };
