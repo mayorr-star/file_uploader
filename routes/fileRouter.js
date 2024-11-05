@@ -1,13 +1,16 @@
 const { Router } = require("express");
-const fileController = require('../controllers/fileController');
-const multer = require("multer");
-const storage = multer.memoryStorage();
+const fileController = require("../controllers/fileController");
 
-const upload = multer({ storage: storage });
 const router = Router();
 
-router.get('/upload/:folderId?', fileController.renderUploadPage);
-router.post('/upload/:folderId?/new', upload.single('file'), fileController.postFile);
-router.get('/:fileId/open', fileController.getFile);
+router.get("/upload/:folderId?", fileController.renderUploadPage);
+router.post(
+  "/upload/:folderId?/new",
+  fileController.postFileToMulter,
+  fileController.postFileToCloudinary,
+  fileController.postFile
+);
+router.get("/:fileId/open", fileController.getFile);
+router.get("/:fileId/download", fileController.downloadFile);
 
 module.exports = router;
