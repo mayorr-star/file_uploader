@@ -12,5 +12,10 @@ router.post(
 );
 router.get("/:fileId/open", fileController.getFile);
 router.get("/:fileId/download", fileController.downloadFile);
+router.post(
+  "/:fileId/delete",
+  fileController.deleteFileFromCloudinary,
+  fileController.deleteFile
+);
 
 module.exports = router;
