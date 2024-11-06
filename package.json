@@ -21,6 +21,7 @@
     "@quixo3/prisma-session-store": "^3.1.13",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
+    "cloudinary-build-url": "^0.2.4",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
