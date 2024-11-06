@@ -41,7 +41,7 @@ const getUniqueFile = asyncHandler(async (id) => {
   const file = await prisma.file.findUnique({
     where: { id: id },
   });
-  return file
+  return file;
 });
 
 const getUniqueFolder = asyncHandler(async (id) => {
@@ -65,13 +65,15 @@ const createUser = asyncHandler(async (username, email, password) => {
 });
 
 const createFile = asyncHandler(
-  async (fileName, size, userId, folderId = null) => {
+  async (fileName, size, userId, url, publicId, folderId = null) => {
     await prisma.file.create({
       data: {
         name: fileName,
         size: size,
         user: { connect: { id: userId } },
         folder: folderId ? { connect: { id: folderId } } : undefined,
+        url: url,
+        publicId: publicId
       },
     });
   }
@@ -106,6 +108,14 @@ const deleteFiles = asyncHandler(async (folderId) => {
   });
 });
 
+const deleteFileFromBD = asyncHandler(async (fileId) => {
+  await prisma.file.delete({
+    where: {
+      id: fileId,
+    },
+  });
+});
+
 const deleteFolder = asyncHandler(async (id) => {
   await prisma.folder.delete({
     where: {
@@ -126,5 +136,6 @@ module.exports = {
   createFolder,
   updateFolder,
   deleteFolder,
-  deleteFiles
+  deleteFiles,
+  deleteFileFromBD
 };
