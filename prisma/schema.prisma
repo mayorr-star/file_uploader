@@ -38,6 +38,8 @@ model File {
   uploadTime DateTime @default(now())
   user       User?    @relation(fields: [userId], references: [id])
   userId     String?
+  url        String   @default("null")
+  publicId   String   @default("null")
 }
 
 model Folder {
