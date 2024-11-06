@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
+const cloudinary = require("../config/cloudinary");
 const db = require("../db/queries");
 const { NotFoundError } = require("../error handling/errors/errors");
 
@@ -19,7 +19,7 @@ const postFolder = asyncHandler(async (req, res) => {
 const getFolderContent = asyncHandler(async (req, res) => {
   const { folderId } = req.params;
   const folder = await db.getUniqueFolder(folderId);
-  if (!folder) throw new NotFoundError("Not found, Folder does nt exist");
+  if (!folder) throw new NotFoundError("Not found, Folder does not exist");
   const subfolders = folder.subfolders;
   const files = folder.files;
   res.render("folderContent", {
@@ -45,9 +45,22 @@ const updateFolder = asyncHandler(async (req, res) => {
 
 const deleteFolder = asyncHandler(async (req, res) => {
   const { folderId } = req.params;
+  const folder = await db.getUniqueFolder(folderId);
+  const parentId = folder.parentId;
+  const deletedFileIds = await Promise.all(
+    folder.files.map(async (file) => {
+      try {
+        await cloudinary.uploader.destroy(file.publicId);
+      } catch (error) {
+        console.error(`Error deleting file ${publicId}:`, error);
+        return null;
+      }
+    })
+  );
   await db.deleteFiles(folderId);
   await db.deleteFolder(folderId);
-  res.redirect("/dashboard");
+  const route = parentId ? `/folder/${folderId}/open` : '/dashboard';
+  res.redirect(route);
 });
 
 module.exports = {
