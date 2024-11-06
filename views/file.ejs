@@ -14,6 +14,9 @@
             <p>Uploaded: <%= file.uploadTime %></p>
         </div>
         <a href="/file/<%= file.id %>/download">Download</a>
+        <form action="/file/<%= file.id %>/delete" method="post">
+            <button type="submit">delete</button>
+        </form>
     </main>
 </body>
 </html>
