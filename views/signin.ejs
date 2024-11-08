@@ -4,16 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign in | Files Bucket</title>
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/signin.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
   </head>
   <body>
     <%- include('partials/nav') %>
     <header>
       <h1>Sign in to your account</h1>
-      <p>Or <a href="/sign_in">sign up for a new account</a></p>
+      <p>Or <a href="/sign_up">sign up for a new account</a></p>
     </header>
     <main>
-      <div class="white_bg">
-        <div class="form">
+      <div class="bg_gray">
+        <div class="wrapper">
           <% if (err_msg) { %>
           <div class="err"><%= err_msg %></div>
           <% } %>
@@ -26,10 +30,13 @@
               <label for="password">Password</label>
               <input type="password" name="password" id="password" />
             </div>
-            <button type="submit">Sign in</button>
+            <div class="input-control">
+              <button type="submit" class="signin_btn">Sign in</button>
+            </div>
           </form>
         </div>
       </div>
     </main>
+    <%- include('partials/footer') %>
   </body>
 </html>

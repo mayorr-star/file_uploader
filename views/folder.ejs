@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Folder | Files Bucket</title>
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/folder.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
     <%- include('partials/nav') %>
@@ -17,7 +21,9 @@
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name">
                 </div>
-                    <button type="submit">Create</button>
+                <div class="input-control">
+                    <button type="submit" class="new_folder_btn">Create</button>
+                </div>
             </form>
         </div>
     </main>

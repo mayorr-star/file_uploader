@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | Files Bucket</title>
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
   </head>
   <body>
     <%- include('partials/nav') %>
     <header>
-        <h1>Welcome <%= username %></h1>
-        <hr />
+      <h1>Welcome <%= username %></h1>
+      <hr />
     </header>
     <main>
       <section class="section_btns">
@@ -18,20 +22,20 @@
             <button type="button">
               Upload file
               <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 0 24 24"
+                width="18"
               >
-              <path d="M0 0h24v24H0V0z" fill="none" />
-              <path
-              d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15.01l1.41 1.41L11 14.84V19h2v-4.16l1.59 1.59L16 15.01 12.01 11z"
-              />
-            </svg>
-        </button>
-    </a>
-    <a href="/folder/create">
-        <button type="button">
+                <path
+                  d="M8 17V15H16V17H8M16 11L12 7L8 11H10.5V14H13.5V11H16M5 3H19C20.11 3 21 3.9 21 5V19C21 20.11 20.11 21 19 21H5C3.9 21 3 20.11 3 19V5C3 3.9 3.9 3 5 3M5 5V19H19V5H5Z"
+                  fill="white"
+                />
+              </svg>
+            </button>
+          </a>
+          <a href="/folder/create">
+            <button type="button">
               New folder
               <svg
                 height="16"
@@ -41,50 +45,83 @@
               >
                 <path
                   d="m3 1c-1.644531 0-3 1.355469-3 3v8c0 1.644531 1.355469 3 3 3h3c.550781 0 1-.449219 1-1s-.449219-1-1-1h-3c-.5625 0-1-.4375-1-1v-7h11c.5625 0 1 .4375 1 1v1c0 .550781.449219 1 1 1s1-.449219 1-1v-1c0-1.644531-1.355469-3-3-3h-3.585938l-1.707031-1.707031c-.1875-.1875-.441406-.292969-.707031-.292969zm0 2h3.585938l1 1h-5.585938c0-.5625.4375-1 1-1zm8 5v3h-3v2h3v3h2v-3h3v-2h-3v-3zm0 0"
-                  fill="#2e3436"
-                  />
-                </svg>
+                  fill="white"
+                />
+              </svg>
             </button>
-        </a>
-    </div>
+          </a>
+        </div>
       </section>
       <section class="content_wrapper">
-          <div class="content">
-            <div class="grid_header">
-              <div class="grid_header_name">Name</div>
-              <div class="grid_header_size">Size</div>
-              <div class="grid_header_created">Created</div>
-            </div>
-            <div class="grid_body">
-              <% folders.forEach(folder => { %>
-                <div class="folder">
-                  <a href="/folder/<%= folder.id %>/open">
-                      <div class="grid_body_name"><%= folder.name %></div>
-                      <div class="grid_body_size">---</div>
-                      <div class="grid_body_created"><%= folder.createdAt %></div>
-                    </tr>
-                  </a>
-                  <div class="btns">
-                    <a href="/folder/<%= folder.id %>/update">
-                      <button type="button">Update</button>
-                    </a>'
-                    <form action="/folder/<%= folder.id %>/delete" method="post">
-                      <button type="submit">Delete</button>
-                    </form>
-                  </div>
+        <div class="content">
+          <div class="grid_header">
+            <div class="grid_header_name">Name</div>
+            <div class="grid_header_size">Size</div>
+            <div class="grid_header_created">Created At</div>
+          </div>
+          <div class="grid_body">
+            <% folders.forEach(folder => { %>
+            <div class="folders">
+              <a href="/folder/<%= folder.id %>/open">
+                <div class="grid_body_name">
+                  <svg
+                    height="16"
+                    viewBox="0 0 16 16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m3 1c-1.644531 0-3 1.355469-3 3v8c0 1.644531 1.355469 3 3 3h3c.550781 0 1-.449219 1-1s-.449219-1-1-1h-3c-.5625 0-1-.4375-1-1v-7h11c.5625 0 1 .4375 1 1v1c0 .550781.449219 1 1 1s1-.449219 1-1v-1c0-1.644531-1.355469-3-3-3h-3.585938l-1.707031-1.707031c-.1875-.1875-.441406-.292969-.707031-.292969zm0 2h3.585938l1 1h-5.585938c0-.5625.4375-1 1-1zm8 5v3h-3v2h3v3h2v-3h3v-2h-3v-3zm0 0"
+                      fill="#2e3436"
+                    />
+                  </svg>
+                  <%= folder.name %>
                 </div>
-                <% }) %>
-                <% rootFiles.forEach(file => { %>
-                  <a href="/file/<%= file.id %>/open">
-                    <div class="grid_body_name"><%= file.name %></div>
-                    <div class="grid_body_size"><%= file.size %></div>
-                    <div class="grid_body_created"><%= file.uploadTime %></div>
-                </a>
+                <div class="grid_body_size">---</div>
+                <div class="grid_body_created">
+                  <%= formatDate(folder.createdAt) %>
+                </div>
+              </a>
+            </div>
+            <% }) %>
+            <div class="files">
+              <% rootFiles.forEach(file => { %>
+              <a href="/file/<%= file.id %>/open">
+                <div class="grid_body_name">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                  <%= file.name %>
+                </div>
+                <div class="grid_body_size">
+                  <%= formatFileSize(file.size) %>
+                </div>
+                <div class="grid_body_created">
+                  <%= formatDate(file.uploadTime) %>
+                </div>
+              </a>
               <% }) %>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
     </main>
     <%- include('partials/footer') %>
-</body>
+  </body>
 </html>
