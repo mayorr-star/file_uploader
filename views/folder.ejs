@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Folder | Files Bucket</title>
-    <link rel="stylesheet" href="/css/general.css">
-    <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/folder.css">
-    <link rel="stylesheet" href="/css/footer.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/folder.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="icon" type="image/x-icon" href="/icons/bucket.svg" />
+  </head>
+  <body>
     <%- include('partials/nav') %>
     <header>
-        <h1>Add New Folder</h1>
+      <h1>Add New Folder</h1>
     </header>
     <main>
-        <div class="white-bg">
-            <form action="<%= url %>" method="post">
-                <div class="input-control">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name">
-                </div>
-                <div class="input-control">
-                    <button type="submit" class="new_folder_btn">Create</button>
-                </div>
-            </form>
-        </div>
+      <div class="white-bg">
+        <form action="<%= url %>" method="post">
+          <div class="input-control">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" />
+          </div>
+          <div class="input-control">
+            <button type="submit" class="new_folder_btn">Create</button>
+          </div>
+        </form>
+      </div>
     </main>
     <%- include('partials/footer') %>
-</body>
+  </body>
 </html>

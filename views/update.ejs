@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Update <%= folder.name %> | Files Bucket</title>
-    <link rel="stylesheet" href="/css/general.css">
-    <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/folder.css">
-    <link rel="stylesheet" href="/css/footer.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/folder.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="icon" type="image/x-icon" href="/icons/bucket.svg" />
+  </head>
+  <body>
     <%- include('partials/nav') %>
     <main>
-        <div class="white_bg">
-            <div class="form">
-                <header>
-                    <h3>Update Folder</h3>
-                </header>
-                <%- include('partials/errors') %>
-                <form action="/folder/<%= folder.id %>/update" method="post">
-                    <div class="input-control">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" value="<%= folder.name %>" required>
-                    </div>
-                    <div class="input-control">
-                        <button type="submit" class="update_btn">Update</button>
-                    </div>
-                </form>
+      <div class="white_bg">
+        <div class="form">
+          <header>
+            <h3>Update Folder</h3>
+          </header>
+          <%- include('partials/errors') %>
+          <form action="/folder/<%= folder.id %>/update" method="post">
+            <div class="input-control">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value="<%= folder.name %>"
+                required
+              />
             </div>
+            <div class="input-control">
+              <button type="submit" class="update_btn">Update</button>
+            </div>
+          </form>
         </div>
+      </div>
     </main>
     <%- include('partials/footer') %>
-</body>
+  </body>
 </html>
