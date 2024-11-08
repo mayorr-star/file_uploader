@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const db = require("../db/queries");
 const { NotFoundError } = require("../error handling/errors/errors");
+const formatDate = require('../public/js/date');
+const formatFileSize = require('../public/js/size');
 
 const getHomePage = asyncHandler(async (req, res) => {
   res.render("index", { user: Boolean(req.user) });
@@ -27,8 +29,10 @@ const getDashboard = asyncHandler(async (req, res) => {
   res.render("dashboard", {
     username: req.user.username,
     user: Boolean(req.user),
-    folders: folders,
-    rootFiles: rootFiles,
+    folders,
+    rootFiles,
+    formatDate,
+    formatFileSize
   });
 });
 

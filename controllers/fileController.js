@@ -5,6 +5,9 @@ const upload = require("../config/multer");
 const cloudinary = require("../config/cloudinary");
 const generateUniquePublicId = require("../utilis/generateUniquePublicId");
 const axios = require("axios");
+const formatDate = require('../public/js/date');
+const formatFileSize = require('../public/js/size');
+
 
 const renderUploadPage = asyncHandler(async (req, res) => {
   const folderId = req.params.folderId || null;
@@ -48,7 +51,7 @@ const getFile = asyncHandler(async (req, res) => {
   const fileId = req.params.fileId;
   const file = await db.getUniqueFile(fileId);
   if (!file) throw new NotFoundError("Not found, file does not exist");
-  res.render("file", { user: Boolean(req.user), file: file });
+  res.render("file", { user: Boolean(req.user), file,  formatDate, formatFileSize});
 });
 
 const downloadFile = asyncHandler(async (req, res) => {

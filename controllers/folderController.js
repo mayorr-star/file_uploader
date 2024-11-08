@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const cloudinary = require("../config/cloudinary");
 const db = require("../db/queries");
 const { NotFoundError } = require("../error handling/errors/errors");
+const formatDate = require('../public/js/date');
+const formatFileSize = require('../public/js/size');
 
 const renderFolderForm = asyncHandler(async (req, res) => {
   const parentId = req.params.parentId || null;
@@ -26,7 +28,9 @@ const getFolderContent = asyncHandler(async (req, res) => {
     user: Boolean(req.user),
     folder: folder,
     files: files,
-    subfolders: subfolders
+    subfolders: subfolders,
+    formatDate,
+    formatFileSize
   });
 });
 
