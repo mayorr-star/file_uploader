@@ -1,0 +1,51 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1;
+}
+
+nav, footer{
+    background-color: #00693E;
+} 
+
+nav a, nav, footer{
+    color: white;
+}
+
+main{
+    padding: 40px;
+}
+
+.file_info p{
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btns{
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.delete, .download{
+    transition: trasnform 500ms ease-in-out;
+}
+
+.delete:hover, .download:hover{
+    transform: scale(1.2);
+}
+
+.delete{
+    background: transparent;
+    border: 0;
+}

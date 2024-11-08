@@ -1,0 +1,63 @@
+header {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-control {
+  padding: 12px;
+}
+
+.input-control > label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 3px;
+}
+
+.input-control > input {
+  padding: 12px 15px;
+  border-radius: 7px;
+  outline: none;
+  width: 100%;
+  border: 1px solid #dcdcdc;
+}
+
+.input-control > input:focus {
+  outline: 1px solid #0039a6;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+main {
+  flex: 1;
+}
+
+body {
+  background-color: rgb(243, 244, 246);
+}
+
+nav,
+footer {
+  background-color: white;
+}
+
+.new_folder_btn,
+.upload_btn, .update_btn {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  background-color: #0039a6;
+  color: #faf9f6;
+  border: 0px;
+}
